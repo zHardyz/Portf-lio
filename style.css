@@ -2,14 +2,16 @@
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background: black;
-  color: #ffffff;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 2.8s ease-out;
+  transition: all 0.8s ease-out;
+  will-change: transform, opacity;
 }
 
 .animate-on-scroll.visible {
@@ -19,15 +21,17 @@ body {
 
 /* Estilo especial para o botão "Ler Mais" */
 .special-btn {
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
   display: inline-block;
   padding: 12px 30px;
   font-size: 1.2rem;
-  color: #ffffff;
+  color: var(--bg-primary);
   background: linear-gradient(to right, #4400fd, #0099ff);
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  position: relative;
   overflow: hidden;
   transition: color 0.4s ease;
 }
@@ -39,7 +43,10 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, #000000b0, #00000059);
+  background: linear-gradient(to right, 
+    rgba(var(--text-primary), 0.7), 
+    rgba(var(--text-primary), 0.3)
+  );
   transition: all 0.4s ease;
   z-index: 0;
 }
@@ -76,20 +83,53 @@ html {
 
 /* Hero Section */
 #hero {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   text-align: center;
-  background: url('imagens/black-2398252.jpg') no-repeat center center/cover;
+  background: var(--hero-bg-image) no-repeat center center/cover;
   animation: fadeIn 2s ease-in;
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--hero-overlay);
+  z-index: 1;
+}
+
+#hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+#hero h1, 
+#hero .title,
+#hero .special-btn {
+  color: #ffffff !important; /* Força o texto a ser sempre branco */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra escura para melhor legibilidade */
+}
+
+#hero h1 .highlight {
+  color: #ffffff !important;
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 10px var(--accent-secondary); /* Mantém o efeito de brilho */
 }
 
 #hero h1 {
   font-size: 4rem;
-  color: #fdfdfd;
-  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   animation: slideInFromLeft 1s ease-out;
+}
+
+#hero .title {
+  text-shadow: 1px 1px 3px var(--shadow-color);
 }
 
 #hero .btn {
@@ -113,7 +153,7 @@ html {
 #about {
   padding: 50px 0;
   text-align: center;
-  background: #000000;
+  background: var(--section-bg);
   animation: fadeInUp 1.5s ease;
 }
 
@@ -136,12 +176,12 @@ html {
 }
 
 .skill {
-  background: #ffffff;
+  background: var(--card-bg);
   padding: 10px 20px;
   border-radius: 25px;
   font-size: 1rem;
-  color: #000000;
-  transition: transform 0.3s ease;
+  color: var(--text-primary);
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .skill:hover {
@@ -151,7 +191,7 @@ html {
 /* Projects Section */
 #projects {
   padding: 50px 0;
-  background: #000000;
+  background: var(--section-bg);
   animation: fadeInUp 1.5s ease;
 }
 
@@ -177,9 +217,9 @@ text-align: center; /* Centraliza o texto */
 padding: 20px;
 margin: 20px auto; /* Centraliza o container no eixo horizontal */
 max-width: 400px; /* Limita a largura máxima do div */
-border: 1px solid #ddd; /* Opcional: borda para visualização */
+border: 1px solid var(--border-color); /* Opcional: borda para visualização */
 border-radius: 8px; /* Opcional: bordas arredondadas */
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: sombra suave */
+box-shadow: 0 4px 8px var(--shadow-color); /* Opcional: sombra suave */
 }
 
 .project img {
@@ -192,12 +232,12 @@ margin: 0 auto; /* Centraliza horizontalmente */
 .project h3 {
 margin-top: 15px;
 font-size: 1.5rem;
-color: #ffffff;
+color: var(--text-primary);
 }
 
 .project p {
 font-size: 1rem;
-color: #acacac;
+color: var(--text-secondary);
 margin-top: 10px;
 }
 .project img {
@@ -207,13 +247,13 @@ margin-top: 10px;
 
 .project:hover {
   transform: translateY(-10px);
-  box-shadow: 0 6px 12px rgb(206, 0, 0);
+  box-shadow: 0 6px 12px var(--hover-shadow);
 }
 
 /* Services Section */
 #services {
   padding: 50px 0;
-  background: #000000;
+  background: var(--section-bg);
   animation: fadeInUp 1.5s ease;
 }
 
@@ -224,13 +264,13 @@ margin-top: 10px;
   justify-content: center;
 }
 .service {
-  background: transparent; /* Torna o fundo transparente */
+  background: var(--card-bg);
   padding: 20px;
-  border: 2px solid #ffffff; /* Define um contorno azul */
+  border: 2px solid var(--border-color);
   border-radius: 10px;
   text-align: center;
   width: 250px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .service:hover {
@@ -240,12 +280,12 @@ margin-top: 10px;
 /* Social Media Section */
 #social {
   padding: 50px 0;
-  background: #000000;
+  background: var(--section-bg);
   animation: fadeInUp 1.5s ease;
 }
 
 .social-links a {
-  color: #ffffff;
+  color: var(--text-primary);
   margin: 0 10px;
   font-size: 1.5rem;
   text-decoration: none;
@@ -253,7 +293,7 @@ margin-top: 10px;
 }
 
 .social-links a:hover {
-  color: #00a2ff;
+  color: var(--accent-secondary);
 }
 
 
@@ -263,7 +303,7 @@ margin-top: 10px;
 footer {
   text-align: center;
   padding: 20px;
-  background: #000000;
+  background: var(--section-bg);
 }
 
 /* Animations */
@@ -310,6 +350,23 @@ footer {
     width: 100%;
     padding: 0 10px;
   }
+
+  .project {
+    max-width: 100%;
+    margin: 10px;
+  }
+  
+  .project img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -339,10 +396,12 @@ footer {
 
 @keyframes glow {
   from {
-    text-shadow: 0 0 10px #000000, 0 0 20px #000000;
+    text-shadow: 0 0 10px var(--shadow-color), 
+                 0 0 20px var(--shadow-color);
   }
   to {
-    text-shadow: 0 0 20px #ffffff8a, 0 0 30px #ffffff9c;
+    text-shadow: 0 0 20px var(--accent-secondary), 
+                 0 0 30px var(--accent-secondary);
   }
 }
 
@@ -370,4 +429,200 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+
+:root {
+  /* Dark Theme (default) */
+  --bg-primary: #000000;
+  --bg-secondary: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --accent-primary: #4400fd;
+  --accent-secondary: #0099ff;
+  --hero-bg-image: url('imagens/black-2398252.jpg');
+  --hero-overlay: rgba(0, 0, 0, 0.5);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --shadow-color: rgba(255, 255, 255, 0.1);
+  --border-color: #333333;
+  --hover-shadow: rgb(206, 0, 0);
+  --section-bg: #000000;
+}
+
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --accent-primary: #0066cc;
+  --accent-secondary: #0099ff;
+  --hero-bg-image: url('imagens/r8.jpg');
+  --hero-overlay: rgba(0, 0, 0, 0.4); /* Overlay um pouco mais escuro para melhor contraste */
+  --card-bg: rgba(0, 0, 0, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-color: #dddddd;
+  --hover-shadow: rgb(255, 0, 0);
+  --section-bg: #ffffff;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--card-bg);
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+  background: var(--bg-secondary);
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle .sun-icon {
+  display: none;
+}
+
+[data-theme="light"] .sun-icon {
+  display: block;
+}
+
+[data-theme="light"] .moon-icon {
+  display: none;
+}
+
+/* Atualizar estilos existentes para usar variáveis */
+#hero {
+  background: var(--hero-bg-image) no-repeat center center/cover;
+}
+
+.skill {
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.project, .service {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+/* Transições suaves */
+.project, .service, .skill {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Atualizar seções que tinham background fixo */
+#about, #projects, #services, #social, footer {
+  background: var(--section-bg);
+}
+
+/* Atualizar cores de texto */
+.project h3 {
+  color: var(--text-primary);
+}
+
+.project p {
+  color: var(--text-secondary);
+}
+
+.social-links a {
+  color: var(--text-primary);
+}
+
+.social-links a:hover {
+  color: var(--accent-secondary);
+}
+
+/* Atualizar hover states */
+.project:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px var(--hover-shadow);
+}
+
+/* Atualizar botão especial */
+.special-btn {
+  color: var(--bg-primary);
+}
+
+.special-btn::before {
+  background: linear-gradient(to right, 
+    rgba(var(--text-primary), 0.7), 
+    rgba(var(--text-primary), 0.3)
+  );
+}
+
+/* Ajustar sombras de texto */
+#hero h1 {
+  text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px var(--shadow-color), 
+                 0 0 20px var(--shadow-color);
+  }
+  to {
+    text-shadow: 0 0 20px var(--accent-secondary), 
+                 0 0 30px var(--accent-secondary);
+  }
+}
+
+/* Ajustar bordas */
+.service {
+  border: 2px solid var(--border-color);
+}
+
+.project {
+  border: 1px solid var(--border-color);
+}
+
+/* Ajustar hr */
+hr {
+  border-color: var(--border-color);
+  opacity: 0.2;
+}
+
+/* Ajustar botão de tema */
+.theme-toggle {
+  background: var(--card-bg);
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+  background: var(--bg-secondary);
+}
+
+/* Transições suaves para todos os elementos */
+*, *::before, *::after {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Ajustar o botão especial no hero */
+#hero .special-btn {
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#hero .special-btn:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
