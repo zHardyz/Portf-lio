@@ -1,145 +1,320 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jasson Adriano's personal portfolio showcasing skills, projects, and services.">
-  <title>Jasson Adriano - Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-  <script src="script.js" defer></script>
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="preload" href="imagens/black-2398252.jpg" as="image">
-  <link rel="preload" href="imagens/white-background.jpg" as="image">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Jasson Adriano - Desenvolvedor Full Stack, Editor de Vídeos e Designer">
+    <title>Hardy Dev - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- Theme Toggle Button -->
-  <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
-    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-      <path d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3zm0-2V4c0-.55-.45-1-1-1s-1 .45-1 1v3c0 .55.45 1 1 1s1-.45 1-1zm0 14v-3c0-.55-.45-1-1-1s-1 .45-1 1v3c0 .55.45 1 1 1s1-.45 1-1zm6.36-12.95l2.12-2.12c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0l-2.12 2.12c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0zM4.93 19.07l2.12-2.12c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0l-2.12 2.12c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0zm14.14 0c.39-.39.39-1.02 0-1.41l-2.12-2.12c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41l2.12 2.12c.39.39 1.02.39 1.41 0zM4.93 4.93c.39.39 1.02.39 1.41 0l2.12-2.12c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0L4.93 3.52c-.39.39-.39 1.02 0 1.41z"/>
-    </svg>
-    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
-    </svg>
-  </button>
-
-  <!-- HERO SECTION -->
-  <section id="hero">
-    <div class="container">
-      <h1>Olá, eu sou <span class="highlight">Jasson Adriano</span></h1>
-      <p class="title">Programmer | Video Editor | Graphic Designer | Beginner Game Developer | YouTuber</p>
-      <a href="#about" class="special-btn">Mais</a>
-    </div>
-  </section>
-  
-
-  <!-- ABOUT ME SECTION -->
-  <section id="about" class="animate-on-scroll">
-    <div class="container">
-      <h2>Sobre</h2>
-      <p>
-        Eu planejo criar vários projetos, sempre pensando em inovar ou crescer. Sempre gasto tempo aprendendo sobre software na prática, mas nunca salvei nada para usar depois. Agora, estou começando a aplicar meus projetos.
-      </p>
-      <div class="skills">
-        <div class="skill animate-on-scroll">HTML</div>
-        <div class="skill animate-on-scroll">CSS</div>
-        <div class="skill animate-on-scroll">JavaScript</div>
-        <div class="skill animate-on-scroll">PYTHON</div>
-      </div>
-    </div>
-  </section>
-  <hr>
-
-  <!-- PROJECTS SECTION -->
-  <section id="projects" class="animate-on-scroll">
-    <div class="container">
-      <h2>Meus projetos</h2>
-      <div class="project-list">
-        <div class="project animate-on-scroll">
-            <a href="https://zhardyz.github.io/em-jogo/" target="_blank">
-                <img src="imagens/capa,biblioteca.png" alt="Project 1">
-            </a>
-            <h3>Minha biblioteca</h3>
-            <p>Onde guardo arquivos de jogos, materiais de edição e meus projetos abertos.</p>
+    <!-- Header Fixo -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">Hardy<span>Dev</span></a>
             
-        </div>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#home">Início</a>
+                    <a href="#about">Sobre</a>
+                    <a href="#projects">Projetos</a>
+                    <a href="#services">Serviços</a>
+                    <a href="#contact">Contato</a>
+                </div>
+                
+                <div class="nav-controls">
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
+                        <svg class="sun-icon" viewBox="0 0 24 24">
+                            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                        </svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24">
+                            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+                        </svg>
+                    </button>
+                    
+                    <button class="nav-toggle" aria-label="Menu de navegação">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-        <div class="project animate-on-scroll">
-          <a href="https://zhardyz.github.io/Relogio/" target="_blank">
-              <img src="imagens/relogio.png" alt="Project 1">
-          </a>
-          <h3>Relogio digital com um mistério</h3>
-          <p>Um relogio virtual em tempo real ( existe um esteregg )</p>
-          
-      </div>
-      <div class="project animate-on-scroll">
-        <a href="https://zhardyz.github.io/Mimir/" target="_blank">
-            <img src="imagens/mimir.jpg" alt="Project 1">
-        </a>
-        <h3>MIMIR</h3>
-        <p>Minha inteligencia artificial em desenvolvimento</p>
-        
-    </div>
-    <div class="project animate-on-scroll">
-      <a href="https://zhardyz.github.io/Lone/" target="_blank">
-          <img src="imagens/loneport.png" alt="Project 1">
-      </a>
-      <h3>Portfolio para YouTuber</h3>
-      <p>Um portfolio pessoal personalizado feito em html css e js para o Youtuber/editor, Lone.</p>
-      
-  </div>
-      
-        <div class="project animate-on-scroll">
-          <img src="imagens/game-oficial.png" alt="Project 2">
-          <h3>Game Demo</h3>
-          <p>Um jogo 2D onde você é um estudante que coleta fragmentos da história do Brasil. (projeto inativado)</p>
+    <!-- Hero Section Modernizada -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="glitch-text">Jasson Adriano</h1>
+            <div class="typing-container">
+                <span class="typing-text"></span>
+            </div>
+            <p class="hero-description">Transformando ideias em realidade digital</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">Ver Projetos</a>
+                <a href="#contact" class="btn btn-secondary">Contato</a>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <hr>
+        <div class="hero-background"></div>
+    </section>
 
-  <!-- SERVICES SECTION -->
-  <section id="services" class="animate-on-scroll">
-    <div class="container">
-      <h2>Serviços</h2>
-      <div class="services-list">
-        <div class="service animate-on-scroll">
-          <h3>programador</h3>
-          <p>Construo portfólios pessoais personalizados para uma melhor visibilidade. e também desenvolvo jogos 2D pela engine GAME MAKER</p>
+    <!-- Sobre Section com Cards -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Eu planejo criar vários projetos, sempre pensando em inovar ou crescer. Sempre gasto tempo aprendendo sobre software na prática, mas nunca salvei nada para usar depois. Agora, estou começando a aplicar meus projetos.</p>
+                </div>
+                <div class="skills-container">
+                    <h3>Habilidades</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <i class="skill-icon html-icon"></i>
+                            <span>HTML</span>
+                            <div class="skill-level" data-level="90"></div>
+                        </div>
+                        <div class="skill-card">
+                            <i class="skill-icon css-icon"></i>
+                            <span>CSS</span>
+                            <div class="skill-level" data-level="85"></div>
+                        </div>
+                        <div class="skill-card">
+                            <i class="skill-icon js-icon"></i>
+                            <span>JavaScript</span>
+                            <div class="skill-level" data-level="80"></div>
+                        </div>
+                        <div class="skill-card">
+                            <i class="skill-icon python-icon"></i>
+                            <span>Python</span>
+                            <div class="skill-level" data-level="75"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="service animate-on-scroll">
-          <h3>editor de videos</h3>
-          <p>Edito vídeos para postar nas redes sociais.</p>
-        </div>
-        <div class="service animate-on-scroll">
-          <h3>Design gráfico</h3>
-          <p>Faço logomarcas, edição de imagens e thumbnails.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SOCIAL MEDIA SECTION -->
-  <section id="social" class="animate-on-scroll">
-    <div class="container">
-      <h2>Me siga no Instagram</h2>
-      <div class="social-links">
-        <a href="https://instagram.com/hardy_em_jogo" target="_blank">Instagram</a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-          </svg>
-        <hr>
-        <div class="badge-base LI-profile-badge" data-locale="pt_BR" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="jasson-adriano-zzzzz" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://br.linkedin.com/in/jasson-adriano-zzzzz?trk=profile-badge">Jasson Adriano</a></div>
-              
-      </div>
-    </div>
-    
-  </section>
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2024 Hardy em jogo. All Rights Reserved.</p>
-    </div>
-  </footer>
+    <!-- Projetos com Grid Moderno -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projetos em Destaque</h2>
+            <div class="projects-grid">
+                <!-- Biblioteca -->
+                <article class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <img src="imagens/capa,biblioteca.png" alt="Minha Biblioteca">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://zhardyz.github.io/em-jogo/" target="_blank" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zhardyz/em-jogo" target="_blank" class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Minha Biblioteca</h3>
+                        <p>Repositório centralizado para arquivos de jogos, materiais de edição e projetos open-source.</p>
+                        <div class="project-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Relógio Digital -->
+                <article class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <img src="imagens/relogio.png" alt="Relógio Digital">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://zhardyz.github.io/Relogio/" target="_blank" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zhardyz/Relogio" target="_blank" class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Relógio Digital Interativo</h3>
+                        <p>Relógio digital em tempo real com easter egg interativo.</p>
+                        <div class="project-tags">
+                            <span>JavaScript</span>
+                            <span>CSS</span>
+                            <span>Interatividade</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- MIMIR -->
+                <article class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <img src="imagens/mimir.jpg" alt="MIMIR AI">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://zhardyz.github.io/Mimir/" target="_blank" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zhardyz/Mimir" target="_blank" class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>MIMIR - IA Assistant</h3>
+                        <p>Projeto de inteligência artificial em desenvolvimento para assistência personalizada.</p>
+                        <div class="project-tags">
+                            <span>AI</span>
+                            <span>Python</span>
+                            <span>Machine Learning</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Portfolio Lone -->
+                <article class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <img src="imagens/loneport.png" alt="Portfolio Lone">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://zhardyz.github.io/Lone/" target="_blank" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zhardyz/Lone" target="_blank" class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Portfolio YouTuber</h3>
+                        <p>Portfolio personalizado desenvolvido para o YouTuber/editor Lone.</p>
+                        <div class="project-tags">
+                            <span>Web Design</span>
+                            <span>Responsivo</span>
+                            <span>UX/UI</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Game Demo -->
+                <article class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <img src="imagens/game-oficial.png" alt="Game Demo">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <span class="project-status">Em Desenvolvimento</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>História do Brasil - Game</h3>
+                        <p>Jogo educativo 2D onde jogadores coletam fragmentos da história do Brasil.</p>
+                        <div class="project-tags">
+                            <span>Game Maker</span>
+                            <span>2D Game</span>
+                            <span>Educativo</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços com Cards Interativos -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Serviços</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="code-icon"></i>
+                    </div>
+                    <h3>Programador</h3>
+                    <p>Construo portfólios pessoais personalizados e desenvolvo jogos 2D pela engine GAME MAKER</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="video-icon"></i>
+                    </div>
+                    <h3>Editor de Vídeos</h3>
+                    <p>Edito vídeos para postar nas redes sociais.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="design-icon"></i>
+                    </div>
+                    <h3>Design Gráfico</h3>
+                    <p>Faço logomarcas, edição de imagens e thumbnails.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato Atualizada -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contact-content">
+                <div class="contact-text">
+                    <p>Vamos trabalhar juntos? Entre em contato através de um dos canais abaixo:</p>
+                </div>
+                
+                <div class="contact-cards">
+                    <a href="https://wa.me/5591980497330" target="_blank" class="contact-card whatsapp animate-on-scroll">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p>Resposta rápida em horário comercial</p>
+                        <span class="contact-action">Enviar mensagem</span>
+                    </a>
+
+                    <a href="https://instagram.com/hardy_em_jogo" target="_blank" class="contact-card instagram animate-on-scroll">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </div>
+                        <h3>Instagram</h3>
+                        <p>Acompanhe meu trabalho</p>
+                        <span class="contact-action">Seguir</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Atualizado -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Hardy<span>Dev</span></h3>
+                    <p>Transformando ideias em realidade digital</p>
+                </div>
+                <div class="footer-sections">
+                    <div class="footer-nav">
+                        <h4>Navegação</h4>
+                        <a href="#home">Início</a>
+                        <a href="#about">Sobre</a>
+                        <a href="#projects">Projetos</a>
+                        <a href="#services">Serviços</a>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Social</h4>
+                        <a href="https://instagram.com/hardy_em_jogo" target="_blank">Instagram</a>
+                        <a href="https://linkedin.com/in/jasson-adriano-zzzzz" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/zhardyz" target="_blank">GitHub</a>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p>Entre em contato para colaborações e projetos</p>
+                        <a href="mailto:seu-email@exemplo.com" class="footer-btn">Enviar Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hardy em jogo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
