@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfólio de Jasson Adriano - Desenvolvedor Full Stack, Editor de Vídeos e Designer">
+    <meta name="theme-color" content="#6c5ce7">
     <title>Hardy Dev - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,11 +16,11 @@
     <!-- Header Fixo -->
     <header class="header">
         <nav class="nav-container">
-            <a href="#" class="logo">Hardy<span>Dev</span></a>
+            <a href="#" class="logo" aria-label="Hardy Dev">Hardy<span>Dev</span></a>
             
             <div class="nav-right">
                 <div class="nav-links">
-                    <a href="#home">Início</a>
+                    <a href="#home" aria-current="page">Início</a>
                     <a href="#about">Sobre</a>
                     <a href="#projects">Projetos</a>
                     <a href="#services">Serviços</a>
@@ -28,16 +29,16 @@
                 
                 <div class="nav-controls">
                     <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
-                        <svg class="sun-icon" viewBox="0 0 24 24">
+                        <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
                         </svg>
-                        <svg class="moon-icon" viewBox="0 0 24 24">
+                        <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
                         </svg>
                     </button>
                     
-                    <button class="nav-toggle" aria-label="Menu de navegação">
-                        <svg viewBox="0 0 24 24">
+                    <button class="nav-toggle" aria-label="Menu de navegação" aria-expanded="false" aria-controls="nav-links">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                         </svg>
                     </button>
@@ -49,7 +50,7 @@
     <!-- Hero Section Modernizada -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="glitch-text">Jasson Adriano</h1>
+            <h1 class="glitch-text" data-text="Jasson Adriano">Jasson Adriano</h1>
             <div class="typing-container">
                 <span class="typing-text"></span>
             </div>
@@ -59,7 +60,7 @@
                 <a href="#contact" class="btn btn-secondary">Contato</a>
             </div>
         </div>
-        <div class="hero-background"></div>
+        <div class="hero-background" aria-hidden="true"></div>
     </section>
 
     <!-- Sobre Section com Cards -->
@@ -69,29 +70,40 @@
             <div class="about-content">
                 <div class="about-text">
                     <p>Eu planejo criar vários projetos, sempre pensando em inovar ou crescer. Sempre gasto tempo aprendendo sobre software na prática, mas nunca salvei nada para usar depois. Agora, estou começando a aplicar meus projetos.</p>
+                    <p>Meu objetivo é desenvolver soluções criativas e funcionais que atendam às necessidades dos usuários, combinando design atraente com código eficiente.</p>
                 </div>
                 <div class="skills-container">
                     <h3>Habilidades</h3>
                     <div class="skills-grid">
-                        <div class="skill-card">
+                        <div class="skill-card animate-on-scroll">
                             <i class="skill-icon html-icon"></i>
                             <span>HTML</span>
                             <div class="skill-level" data-level="90"></div>
                         </div>
-                        <div class="skill-card">
+                        <div class="skill-card animate-on-scroll">
                             <i class="skill-icon css-icon"></i>
                             <span>CSS</span>
                             <div class="skill-level" data-level="85"></div>
                         </div>
-                        <div class="skill-card">
+                        <div class="skill-card animate-on-scroll">
                             <i class="skill-icon js-icon"></i>
                             <span>JavaScript</span>
-                            <div class="skill-level" data-level="80"></div>
+                            <div class="skill-level" data-level="50"></div>
                         </div>
-                        <div class="skill-card">
+                        <div class="skill-card animate-on-scroll">
                             <i class="skill-icon python-icon"></i>
                             <span>Python</span>
-                            <div class="skill-level" data-level="75"></div>
+                            <div class="skill-level" data-level="70"></div>
+                        </div>
+                        <div class="skill-card animate-on-scroll">
+                            <i class="skill-icon nodejs-icon"></i>
+                            <span>Node.js</span>
+                            <div class="skill-level" data-level="60"></div>
+                        </div>
+                        <div class="skill-card animate-on-scroll">
+                            <i class="skill-icon api-icon"></i>
+                            <span>APIs</span>
+                            <div class="skill-level" data-level="50"></div>
                         </div>
                     </div>
                 </div>
@@ -107,11 +119,11 @@
                 <!-- Biblioteca -->
                 <article class="project-card animate-on-scroll">
                     <div class="project-image">
-                        <img src="imagens/capa,biblioteca.png" alt="Minha Biblioteca">
+                        <img src="imagens/capa,biblioteca.png" alt="Minha Biblioteca - Interface do projeto" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://zhardyz.github.io/em-jogo/" target="_blank" class="project-link">Ver Projeto</a>
-                                <a href="https://github.com/zhardyz/em-jogo" target="_blank" class="project-link">GitHub</a>
+                                <a href="https://zhardyz.github.io/em-jogo/" target="_blank" rel="noopener" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zhardyz/em-jogo" target="_blank" rel="noopener" class="project-link">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -129,11 +141,11 @@
                 <!-- Relógio Digital -->
                 <article class="project-card animate-on-scroll">
                     <div class="project-image">
-                        <img src="imagens/relogio.png" alt="Relógio Digital">
+                        <img src="imagens/relogio.png" alt="Relógio Digital - Interface do projeto" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://zhardyz.github.io/Relogio/" target="_blank" class="project-link">Ver Projeto</a>
-                                <a href="https://github.com/zhardyz/Relogio" target="_blank" class="project-link">GitHub</a>
+                                <a href="https://zhardyz.github.io/Relogio/" target="_blank" rel="noopener" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zhardyz/Relogio" target="_blank" rel="noopener" class="project-link">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -151,42 +163,42 @@
                 <!-- MIMIR -->
                 <article class="project-card animate-on-scroll">
                     <div class="project-image">
-                        <img src="imagens/mimir.jpg" alt="MIMIR AI">
+                        <img src="imagens/mimir.jpg" alt="MIMIR AI - Interface do projeto" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://zhardyz.github.io/Mimir/" target="_blank" class="project-link">Ver Projeto</a>
-                                <a href="https://github.com/zhardyz/Mimir" target="_blank" class="project-link">GitHub</a>
+                                <a href="https://zhardyz.github.io/Mimir/" target="_blank" rel="noopener" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zhardyz/Mimir" target="_blank" rel="noopener" class="project-link">GitHub</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>MIMIR - IA Assistant</h3>
-                        <p>Projeto de inteligência artificial em desenvolvimento para assistência personalizada.</p>
+                        <h3>MIMIR - IA </h3>
+                        <p>Projeto de inteligência artificial no whatsapp em desenvolvimento com capacidade de mudar de humor.</p>
                         <div class="project-tags">
                             <span>AI</span>
-                            <span>Python</span>
-                            <span>Machine Learning</span>
+                            <span>node.js</span>
+                            <span>Whatsapp</span>
                         </div>
                     </div>
                 </article>
 
                 <article class="project-card animate-on-scroll">
                     <div class="project-image">
-                        <img src="imagens/vitrine.png" alt="Relógio Digital">
+                        <img src="imagens/vitrine.png" alt="Vitrine de Afiliados - Interface do projeto" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://zhardyz.github.io/Afiliado/" target="_blank" class="project-link">Ver Projeto</a>
-                                <a href="https://github.com/zHardyz/Afiliado" target="_blank" class="project-link">GitHub</a>
+                                <a href="https://zhardyz.github.io/Afiliado/" target="_blank" rel="noopener" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zHardyz/Afiliado" target="_blank" rel="noopener" class="project-link">GitHub</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>vitrine de afiliados</h3>
-                        <p>exemplo de catalogo de produtos com links de afiliado de produtos que recomendo.</p>
+                        <h3>Vitrine de Afiliados</h3>
+                        <p>Exemplo de catálogo de produtos com links de afiliado de produtos que recomendo.</p>
                         <div class="project-tags">
-                            <span>venda</span>
-                            <span>marketing </span>
-                            <span>template</span>
+                            <span>Venda</span>
+                            <span>Marketing</span>
+                            <span>Template</span>
                         </div>
                     </div>
                 </article>
@@ -194,11 +206,11 @@
                 <!-- Portfolio Lone -->
                 <article class="project-card animate-on-scroll">
                     <div class="project-image">
-                        <img src="imagens/loneport.png" alt="Portfolio Lone">
+                        <img src="imagens/loneport.png" alt="Portfolio YouTuber - Interface do projeto" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://zhardyz.github.io/Lone/" target="_blank" class="project-link">Ver Projeto</a>
-                                <a href="https://github.com/zhardyz/Lone" target="_blank" class="project-link">GitHub</a>
+                                <a href="https://zhardyz.github.io/Lone/" target="_blank" rel="noopener" class="project-link">Ver Projeto</a>
+                                <a href="https://github.com/zhardyz/Lone" target="_blank" rel="noopener" class="project-link">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -216,7 +228,7 @@
                 <!-- Game Demo -->
                 <article class="project-card animate-on-scroll">
                     <div class="project-image">
-                        <img src="imagens/game-oficial.png" alt="Game Demo">
+                        <img src="imagens/game-oficial.png" alt="História do Brasil - Game em desenvolvimento" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-links">
                                 <span class="project-status">Em Desenvolvimento</span>
@@ -244,26 +256,26 @@
         <div class="container">
             <h2 class="section-title">Serviços</h2>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card animate-on-scroll">
                     <div class="service-icon">
-                        <i class="code-icon"></i>
+                        <i class="code-icon" aria-hidden="true"></i>
                     </div>
                     <h3>Programador</h3>
                     <p>Construo portfólios pessoais personalizados e desenvolvo jogos 2D pela engine GAME MAKER</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card animate-on-scroll">
                     <div class="service-icon">
-                        <i class="video-icon"></i>
+                        <i class="video-icon" aria-hidden="true"></i>
                     </div>
                     <h3>Editor de Vídeos</h3>
-                    <p>Edito vídeos para postar nas redes sociais.</p>
+                    <p>Edito vídeos para postar nas redes sociais com foco em engajamento e qualidade visual.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card animate-on-scroll">
                     <div class="service-icon">
-                        <i class="design-icon"></i>
+                        <i class="design-icon" aria-hidden="true"></i>
                     </div>
                     <h3>Design Gráfico</h3>
-                    <p>Faço logomarcas, edição de imagens e thumbnails.</p>
+                    <p>Faço logomarcas, edição de imagens e thumbnails com design moderno e impactante.</p>
                 </div>
             </div>
         </div>
@@ -279,9 +291,9 @@
                 </div>
                 
                 <div class="contact-cards">
-                    <a href="https://wa.me/5591980497330" target="_blank" class="contact-card whatsapp animate-on-scroll">
+                    <a href="https://wa.me/5591980497330" target="_blank" rel="noopener" class="contact-card whatsapp animate-on-scroll">
                         <div class="contact-icon">
-                            <svg viewBox="0 0 24 24">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                             </svg>
                         </div>
@@ -290,9 +302,9 @@
                         <span class="contact-action">Enviar mensagem</span>
                     </a>
 
-                    <a href="https://instagram.com/hardy_em_jogo" target="_blank" class="contact-card instagram animate-on-scroll">
+                    <a href="https://instagram.com/hardy_em_jogo" target="_blank" rel="noopener" class="contact-card instagram animate-on-scroll">
                         <div class="contact-icon">
-                            <svg viewBox="0 0 24 24">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                             </svg>
                         </div>
@@ -323,8 +335,8 @@
                     </div>
                     <div class="footer-social">
                         <h4>Social</h4>
-                        <a href="https://instagram.com/hardy_em_jogo" target="_blank">Instagram</a>
-                        <a href="https://github.com/zhardyz" target="_blank">GitHub</a>
+                        <a href="https://instagram.com/hardy_em_jogo" target="_blank" rel="noopener">Instagram</a>
+                        <a href="https://github.com/zhardyz" target="_blank" rel="noopener">GitHub</a>
                     </div>
                 </div>
             </div>

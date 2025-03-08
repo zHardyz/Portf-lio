@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initParallaxEffect();
     initGlitchEffect();
     initMobileMenu();
+    initAccessibility();
 });
 
 // Gerenciamento de Tema com Transição Suave
@@ -30,6 +31,10 @@ function initThemeToggle() {
         document.documentElement.classList.add('theme-transition');
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
+        
+        // Atualiza o aria-label para acessibilidade
+        themeToggle.setAttribute('aria-label', 
+            newTheme === 'dark' ? 'Mudar para modo claro' : 'Mudar para modo escuro');
         
         setTimeout(() => {
             document.documentElement.classList.remove('theme-transition');
@@ -95,17 +100,36 @@ function initScrollAnimations() {
                     animateSkillLevel(entry.target);
                 } else if (entry.target.classList.contains('project-card')) {
                     entry.target.style.transitionDelay = `${entries.indexOf(entry) * 0.1}s`;
+                } else if (entry.target.classList.contains('service-card')) {
+                    entry.target.style.transitionDelay = `${entries.indexOf(entry) * 0.15}s`;
                 }
             }
         });
     }, {
-        threshold: 0.2,
+        threshold: 0.15,
         rootMargin: '-50px'
     });
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
         observer.observe(el);
         el.classList.add('animate-hidden');
+    });
+    
+    // Observador separado para seções com efeito de entrada mais suave
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('section-visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '-10px'
+    });
+    
+    document.querySelectorAll('section').forEach(section => {
+        sectionObserver.observe(section);
+        section.classList.add('section-hidden');
     });
 }
 
@@ -126,7 +150,9 @@ function initSkillsAnimation() {
 function animateSkillLevel(card) {
     const level = card.querySelector('.skill-level');
     if (level) {
-        level.style.width = level.getAttribute('data-level') + '%';
+        setTimeout(() => {
+            level.style.width = level.getAttribute('data-level') + '%';
+        }, 300); // Pequeno atraso para melhor efeito visual
     }
 }
 
@@ -135,44 +161,12 @@ function initGlitchEffect() {
     const glitchText = document.querySelector('.glitch-text');
     if (!glitchText) return;
 
-    // Mantém o texto original sem duplicação
-    glitchText.style.position = 'relative';
-    glitchText.style.color = 'var(--text-primary)';
+    // Usa o atributo data-text para o efeito de glitch
+    const text = glitchText.textContent;
+    glitchText.setAttribute('data-text', text);
     
-    // Adiciona efeito de glitch através de pseudo-elementos no CSS
-    const style = document.createElement('style');
-    style.textContent = `
-        .glitch-text {
-            animation: glitch 1s linear infinite;
-        }
-        
-        .glitch-text::before,
-        .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch-text::before {
-            left: 2px;
-            text-shadow: -2px 0 var(--accent-primary);
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim 3s infinite linear alternate-reverse;
-        }
-
-        .glitch-text::after {
-            left: -2px;
-            text-shadow: -2px 0 var(--accent-secondary);
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2s infinite linear alternate-reverse;
-        }
-    `;
-    
-    document.head.appendChild(style);
-    glitchText.setAttribute('data-text', glitchText.textContent);
+    // Adiciona classe para ativar animação
+    glitchText.classList.add('glitch-active');
 }
 
 // Efeito Parallax Suave
@@ -185,8 +179,39 @@ function initParallaxEffect() {
             window.requestAnimationFrame(() => {
                 const scrolled = window.pageYOffset;
                 if (hero) {
-                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    hero.style.transform = `translateY(${scrolled * 0.4}px)`;
+                    hero.style.opacity = Math.max(0.05, 0.2 - (scrolled * 0.0005));
                 }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    // Parallax para outros elementos
+    const parallaxItems = document.querySelectorAll('.section-title, .hero-content');
+    
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                parallaxItems.forEach(item => {
+                    const scrolled = window.pageYOffset;
+                    const parent = item.closest('section');
+                    if (parent) {
+                        const parentTop = parent.offsetTop;
+                        const parentHeight = parent.offsetHeight;
+                        const viewportHeight = window.innerHeight;
+                        
+                        if (scrolled + viewportHeight > parentTop && scrolled < parentTop + parentHeight) {
+                            const distance = (scrolled + viewportHeight - parentTop) * 0.1;
+                            if (item.classList.contains('section-title')) {
+                                item.style.transform = `translateY(${distance * 0.2}px)`;
+                            } else {
+                                item.style.transform = `translateY(${distance * 0.1}px)`;
+                            }
+                        }
+                    }
+                });
                 ticking = false;
             });
             ticking = true;
@@ -212,6 +237,24 @@ function initSmoothScroll() {
 
                 // Atualiza URL sem recarregar a página
                 history.pushState(null, null, this.getAttribute('href'));
+                
+                // Fecha o menu mobile se estiver aberto
+                const navLinks = document.querySelector('.nav-links');
+                const navToggle = document.querySelector('.nav-toggle');
+                if (navLinks && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+                
+                // Atualiza o estado de "current" para acessibilidade
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    if (link === this) {
+                        link.setAttribute('aria-current', 'page');
+                    } else {
+                        link.removeAttribute('aria-current');
+                    }
+                });
             }
         });
     });
@@ -227,12 +270,26 @@ function initProjectHovers() {
 
         project.addEventListener('mouseenter', () => {
             overlay.style.opacity = '1';
-            image.style.transform = 'scale(1.1)';
+            if (image) image.style.transform = 'scale(1.1)';
         });
         
         project.addEventListener('mouseleave', () => {
             overlay.style.opacity = '0';
-            image.style.transform = 'scale(1)';
+            if (image) image.style.transform = 'scale(1)';
+        });
+        
+        // Adiciona suporte para navegação por teclado
+        project.addEventListener('focusin', () => {
+            overlay.style.opacity = '1';
+            if (image) image.style.transform = 'scale(1.1)';
+        });
+        
+        project.addEventListener('focusout', (e) => {
+            // Verifica se o foco saiu completamente do card
+            if (!project.contains(e.relatedTarget)) {
+                overlay.style.opacity = '0';
+                if (image) image.style.transform = 'scale(1)';
+            }
         });
     });
 }
@@ -240,7 +297,24 @@ function initProjectHovers() {
 // Detectar quando a página está completamente carregada
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
-    document.querySelector('.hero-content').classList.add('animate-visible');
+    
+    // Adiciona animação de entrada para o hero
+    setTimeout(() => {
+        document.querySelector('.hero-content').classList.add('animate-visible');
+    }, 300);
+    
+    // Inicia animação de scroll para elementos visíveis na tela
+    const visibleElements = document.querySelectorAll('.animate-on-scroll');
+    visibleElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+            el.classList.add('animate-visible');
+            
+            if (el.classList.contains('skill-card')) {
+                animateSkillLevel(el);
+            }
+        }
+    });
 });
 
 // Preload de Imagens em Background
@@ -265,7 +339,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
     }
 });
 
-// Adicionar ao início do arquivo, junto com as outras inicializações
+// Menu Mobile Aprimorado
 function initMobileMenu() {
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -312,6 +386,90 @@ function initMobileMenu() {
         
         lastScroll = currentScroll;
     });
+    
+    // Adiciona suporte para navegação por teclado
+    navToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            navToggle.click();
+        }
+    });
 }
+
+// Melhorias de Acessibilidade
+function initAccessibility() {
+    // Adiciona roles e atributos ARIA para melhor acessibilidade
+    document.querySelectorAll('.project-card').forEach((card, index) => {
+        card.setAttribute('tabindex', '0');
+    });
+    
+    // Adiciona suporte para navegação por teclado nos cards de serviço
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.setAttribute('tabindex', '0');
+        
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.classList.add('keyboard-focus');
+                
+                // Simula hover
+                const icon = card.querySelector('.service-icon');
+                if (icon) icon.style.background = 'rgba(255, 255, 255, 0.2)';
+                
+                // Remove após um tempo
+                setTimeout(() => {
+                    card.classList.remove('keyboard-focus');
+                    if (icon) icon.style.background = '';
+                }, 1000);
+            }
+        });
+    });
+    
+    // Adiciona indicadores de foco visíveis
+    document.head.insertAdjacentHTML('beforeend', `
+        <style>
+            a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+                outline: 2px solid var(--accent-primary);
+                outline-offset: 3px;
+            }
+        </style>
+    `);
+    
+    // Verifica a posição atual da página e atualiza o estado "current" dos links
+    function updateCurrentNavLink() {
+        const scrollPosition = window.scrollY;
+        const headerHeight = 80;
+        
+        document.querySelectorAll('section[id]').forEach(section => {
+            const sectionTop = section.offsetTop - headerHeight - 100;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                const id = section.getAttribute('id');
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.setAttribute('aria-current', 'page');
+                    } else {
+                        link.removeAttribute('aria-current');
+                    }
+                });
+            }
+        });
+    }
+    
+    // Atualiza o link atual ao carregar e ao rolar
+    window.addEventListener('load', updateCurrentNavLink);
+    window.addEventListener('scroll', updateCurrentNavLink);
+}
+
+// Adiciona animação de scroll para o header
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) {
+        header.classList.add('header-scrolled');
+    } else {
+        header.classList.remove('header-scrolled');
+    }
+});
   
   
