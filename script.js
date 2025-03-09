@@ -346,13 +346,21 @@ function initMobileMenu() {
     
     if (!navToggle || !navLinks) return;
 
-    navToggle.addEventListener('click', () => {
+    navToggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evita que o clique se propague para o documento
         navToggle.classList.toggle('active');
         navLinks.classList.toggle('active');
         
         // Adicionar aria-expanded para acessibilidade
         const isExpanded = navLinks.classList.contains('active');
         navToggle.setAttribute('aria-expanded', isExpanded);
+        
+        // Impedir rolagem do body quando o menu está aberto
+        if (isExpanded) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     });
 
     // Fechar menu ao clicar em um link
@@ -361,30 +369,43 @@ function initMobileMenu() {
             navToggle.classList.remove('active');
             navLinks.classList.remove('active');
             navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            
+            // Atualizar o estado "current" para acessibilidade
+            navLinks.querySelectorAll('a').forEach(navLink => {
+                navLink.removeAttribute('aria-current');
+            });
+            link.setAttribute('aria-current', 'page');
         });
     });
 
     // Fechar menu ao clicar fora
     document.addEventListener('click', (e) => {
-        if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+        if (navLinks.classList.contains('active') && 
+            !navToggle.contains(e.target) && 
+            !navLinks.contains(e.target)) {
             navToggle.classList.remove('active');
             navLinks.classList.remove('active');
             navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
         }
     });
 
     // Fechar menu ao rolar a página
     let lastScroll = 0;
+    const scrollThreshold = 50; // Quantidade de rolagem necessária para fechar o menu
+    
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         
-        if (currentScroll > lastScroll && navLinks.classList.contains('active')) {
+        if (currentScroll > lastScroll + scrollThreshold && navLinks.classList.contains('active')) {
             navToggle.classList.remove('active');
             navLinks.classList.remove('active');
             navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
         }
         
-        lastScroll = currentScroll;
+        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
     });
     
     // Adiciona suporte para navegação por teclado
@@ -392,6 +413,16 @@ function initMobileMenu() {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             navToggle.click();
+        }
+    });
+    
+    // Ajustar menu ao redimensionar a janela
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+            navToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
         }
     });
 }

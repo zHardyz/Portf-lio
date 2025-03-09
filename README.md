@@ -192,21 +192,48 @@ Para alterar as cores do tema:
 
 ## Responsividade
 
-O site já está configurado para ser responsivo em diferentes tamanhos de tela. Se precisar ajustar o comportamento responsivo:
+O site está configurado para ser totalmente responsivo em diferentes tamanhos de tela, desde desktops grandes até smartphones pequenos. A estrutura de responsividade é organizada da seguinte forma:
+
+### Breakpoints Principais
+
+O site utiliza os seguintes breakpoints para adaptação a diferentes dispositivos:
+
+- **Telas grandes (1400px+)**: Layout amplo com 3 colunas para projetos
+- **Telas médias a grandes (até 1200px)**: Layout ajustado com 2 colunas para projetos
+- **Tablets e telas médias (até 992px)**: Ajustes de tamanho de fonte e layout
+- **Tablets pequenos (até 768px)**: Menu mobile ativado, layout em coluna única
+- **Smartphones (até 576px)**: Tamanhos reduzidos, espaçamentos menores
+- **Smartphones pequenos (até 400px)**: Ajustes específicos para telas muito pequenas
+
+### Como Ajustar a Responsividade
+
+Se precisar fazer ajustes na responsividade:
 
 1. Abra o arquivo `style.css`
-2. Localize as media queries no final do arquivo
-3. Ajuste os valores conforme necessário
+2. Localize a seção "Responsividade - Versão Unificada e Melhorada" (próximo ao final do arquivo)
+3. Modifique os valores dentro das media queries conforme necessário
+
+Por exemplo, para ajustar o tamanho da fonte do título principal em smartphones:
 
 ```css
-@media (max-width: 768px) {
-    /* Estilos para tablets e dispositivos menores */
-}
-
 @media (max-width: 576px) {
-    /* Estilos para smartphones */
+    .glitch-text {
+        font-size: 2.3rem; /* Altere este valor */
+    }
+    /* ... outros estilos ... */
 }
 ```
+
+### Testando a Responsividade
+
+Para testar a responsividade do seu site:
+
+1. Use as ferramentas de desenvolvedor do navegador (F12 ou Ctrl+Shift+I)
+2. Ative o modo de visualização responsiva (ícone de dispositivo móvel)
+3. Selecione diferentes tamanhos de tela ou defina dimensões personalizadas
+4. Verifique como o site se comporta em cada tamanho
+
+Recomenda-se testar em dispositivos reais sempre que possível, além dos emuladores do navegador.
 
 ---
 
@@ -216,5 +243,6 @@ O site já está configurado para ser responsivo em diferentes tamanhos de tela.
 - Teste as alterações em diferentes navegadores e dispositivos
 - Otimize as imagens antes de adicioná-las ao site para melhor desempenho
 - Mantenha os arquivos organizados para facilitar futuras edições
+- Ao adicionar novos elementos, certifique-se de que eles sejam responsivos seguindo o padrão existente
 
 Para qualquer dúvida adicional, entre em contato com o desenvolvedor original ou consulte a documentação das tecnologias utilizadas (HTML, CSS e JavaScript). 
