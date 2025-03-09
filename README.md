@@ -143,10 +143,21 @@ Para **adicionar ou editar um serviço**:
     <div class="service-icon">
         <i class="nome-do-servico-icon" aria-hidden="true"></i>
     </div>
-    <h3>Nome do Serviço</h3>
-    <p>Descrição do serviço oferecido.</p>
+    <div class="service-content">
+        <h3>Nome do Serviço</h3>
+        <p>Descrição do serviço oferecido.</p>
+    </div>
 </div>
 ```
+
+### Layout Responsivo de Serviços
+
+A seção de serviços possui um layout adaptativo que muda conforme o tamanho da tela:
+
+- **Em telas grandes (desktop)**: Os serviços são exibidos como cards verticais em uma grade, com o ícone acima do texto.
+- **Em telas pequenas (mobile)**: Os serviços são exibidos como cards horizontais em uma lista, com o ícone à esquerda do texto, proporcionando uma melhor experiência em dispositivos móveis.
+
+Esta abordagem dual garante que a seção de serviços seja sempre apresentada da forma mais adequada para cada dispositivo.
 
 ## Contato
 

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGlitchEffect();
     initMobileMenu();
     initAccessibility();
+    initMobileServiceCards();
 });
 
 // Gerenciamento de Tema com Transição Suave
@@ -502,5 +503,85 @@ window.addEventListener('scroll', () => {
         header.classList.remove('header-scrolled');
     }
 });
+
+// Interatividade para cards de serviço em dispositivos móveis
+function initMobileServiceCards() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    const isMobile = window.innerWidth <= 768;
+    
+    if (!isMobile) return;
+    
+    serviceCards.forEach(card => {
+        // Adiciona efeito de toque
+        card.addEventListener('touchstart', () => {
+            card.classList.add('touch-active');
+        });
+        
+        card.addEventListener('touchend', () => {
+            card.classList.remove('touch-active');
+            
+            // Simula o efeito hover brevemente
+            card.classList.add('touch-hover');
+            setTimeout(() => {
+                card.classList.remove('touch-hover');
+            }, 300);
+        });
+        
+        // Adiciona efeito de swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        card.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        card.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe(card, touchStartX, touchEndX);
+        });
+    });
+    
+    // Atualiza quando a janela é redimensionada
+    window.addEventListener('resize', () => {
+        const isNowMobile = window.innerWidth <= 768;
+        if (isNowMobile !== isMobile) {
+            location.reload(); // Recarrega para aplicar os estilos corretos
+        }
+    });
+}
+
+function handleSwipe(card, startX, endX) {
+    const swipeThreshold = 50; // Mínimo de pixels para considerar um swipe
+    const isVideoCard = card.querySelector('.video-icon') !== null;
+    
+    if (startX - endX > swipeThreshold) {
+        // Swipe para a esquerda - efeito de saída
+        card.style.transform = 'translateX(-100px)';
+        card.style.opacity = '0';
+        
+        setTimeout(() => {
+            card.style.transform = '';
+            card.style.opacity = '';
+        }, 500);
+    } else if (endX - startX > swipeThreshold) {
+        // Swipe para a direita - efeito de destaque
+        card.style.transform = 'translateX(10px)';
+        
+        // Efeito especial para o card de editor de vídeos
+        if (isVideoCard) {
+            const videoIcon = card.querySelector('.video-icon');
+            videoIcon.style.transition = 'all 0.5s ease';
+            videoIcon.style.transform = 'scale(1.2)';
+            
+            setTimeout(() => {
+                videoIcon.style.transform = '';
+            }, 500);
+        }
+        
+        setTimeout(() => {
+            card.style.transform = '';
+        }, 300);
+    }
+}
   
   
