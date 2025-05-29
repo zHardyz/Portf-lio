@@ -57,6 +57,38 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
+    position: relative; /* Necessário para o z-index do background */
+}
+
+.interactive-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* Para o efeito 3D */
+    background: var(--bg-primary);
+}
+
+.ascii-strawberry-container {
+    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada para ASCII art */
+    font-size: 10px; /* Ajuste conforme necessário */
+    line-height: 0.8; /* Ajuste para o espaçamento do ASCII art */
+    color: var(--accent-primary);
+    white-space: pre; /* Mantém a formatação do ASCII art */
+    text-align: center;
+    transform-style: preserve-3d; /* Para transformações 3D */
+    will-change: transform; /* Otimização para animações */
+}
+
+/* Estilos para o tema claro, se necessário */
+[data-theme="light"] .ascii-strawberry-container {
+    color: var(--accent-secondary);
 }
 
 .container {
