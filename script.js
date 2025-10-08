@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initAccessibility();
     initMobileServiceCards();
+    initProjectsCarousel();
+    initAboutCarousel();
 });
 
 // Efeito de Morango ASCII Interativo com GSAP
@@ -698,6 +700,322 @@ function handleSwipe(card, startX, endX) {
             card.style.transform = '';
         }, 300);
     }
+}
+
+// Carrossel de Projetos para Mobile
+function initProjectsCarousel() {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (!isMobile) return;
+    
+    const projectsSection = document.querySelector('.projects');
+    const projectsGrid = document.querySelector('.projects-grid');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    if (!projectsSection || !projectsGrid || projectCards.length === 0) return;
+    
+    // Verificar se já foi inicializado
+    if (projectsGrid.hasAttribute('data-carousel-initialized')) return;
+    projectsGrid.setAttribute('data-carousel-initialized', 'true');
+    
+    // Criar container para indicadores
+    const indicatorsContainer = document.createElement('div');
+    indicatorsContainer.className = 'carousel-indicators';
+    
+    // Criar indicadores para cada projeto
+    projectCards.forEach((card, index) => {
+        const indicator = document.createElement('button');
+        indicator.className = 'carousel-indicator';
+        indicator.setAttribute('aria-label', `Ir para projeto ${index + 1}`);
+        indicator.setAttribute('data-index', index);
+        
+        if (index === 0) {
+            indicator.classList.add('active');
+        }
+        
+        // Adicionar evento de clique para navegar até o projeto
+        indicator.addEventListener('click', () => {
+            const cardWidth = card.offsetWidth;
+            const cardStyle = window.getComputedStyle(card);
+            const marginRight = parseFloat(cardStyle.marginRight) || 0;
+            const gap = marginRight || 24; // Gap dinâmico ou 1.5rem padrão
+            const scrollPosition = (cardWidth + gap) * index;
+            
+            projectsGrid.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        });
+        
+        indicatorsContainer.appendChild(indicator);
+    });
+    
+    // Adicionar indicadores após o grid de projetos
+    projectsSection.querySelector('.container').appendChild(indicatorsContainer);
+    
+    // Garantir que inicia no primeiro card ao carregar
+    requestAnimationFrame(() => {
+        projectsGrid.scrollLeft = 0;
+        updateActiveIndicator();
+    });
+    
+    // Atualizar indicador ativo baseado no scroll
+    let scrollTimeout;
+    projectsGrid.addEventListener('scroll', () => {
+        // Debounce para melhor performance
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            updateActiveIndicator();
+        }, 100);
+    });
+    
+    function updateActiveIndicator() {
+        if (!projectCards[0]) return;
+        
+        const scrollLeft = projectsGrid.scrollLeft;
+        const cardWidth = projectCards[0].offsetWidth;
+        const cardStyle = window.getComputedStyle(projectCards[0]);
+        const marginRight = parseFloat(cardStyle.marginRight) || 0;
+        const gap = marginRight || 24;
+        const cardTotalWidth = cardWidth + gap;
+        
+        // Calcular qual card está mais visível com threshold para evitar mudanças prematuras
+        const rawIndex = scrollLeft / cardTotalWidth;
+        const activeIndex = Math.round(rawIndex);
+        const clampedIndex = Math.max(0, Math.min(activeIndex, projectCards.length - 1));
+        
+        // Atualizar classes dos indicadores
+        const indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
+        indicators.forEach((indicator, index) => {
+            if (index === clampedIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+    
+    // Adicionar suporte para gestos de swipe mais suaves
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+    
+    projectsGrid.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        isDragging = true;
+    }, { passive: true });
+    
+    projectsGrid.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        touchEndX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    projectsGrid.addEventListener('touchend', () => {
+        isDragging = false;
+        
+        const swipeThreshold = 50;
+        const swipeDistance = touchStartX - touchEndX;
+        
+        if (Math.abs(swipeDistance) > swipeThreshold && projectCards[0]) {
+            const scrollLeft = projectsGrid.scrollLeft;
+            const cardWidth = projectCards[0].offsetWidth;
+            const cardStyle = window.getComputedStyle(projectCards[0]);
+            const marginRight = parseFloat(cardStyle.marginRight) || 0;
+            const gap = marginRight || 24;
+            const cardTotalWidth = cardWidth + gap;
+            const currentIndex = Math.round(scrollLeft / cardTotalWidth);
+            
+            let newIndex;
+            if (swipeDistance > 0) {
+                // Swipe para a esquerda - próximo
+                newIndex = Math.min(currentIndex + 1, projectCards.length - 1);
+            } else {
+                // Swipe para a direita - anterior
+                newIndex = Math.max(currentIndex - 1, 0);
+            }
+            
+            projectsGrid.scrollTo({
+                left: cardTotalWidth * newIndex,
+                behavior: 'smooth'
+            });
+        }
+    });
+    
+    // Atualizar ao redimensionar a janela
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const isNowMobile = window.innerWidth <= 768;
+            
+            if (isNowMobile !== isMobile) {
+                location.reload(); // Recarregar para aplicar os estilos corretos
+            } else {
+                updateActiveIndicator();
+            }
+        }, 250);
+    });
+    
+    // Inicializar o indicador ativo
+    updateActiveIndicator();
+}
+
+// Carrossel de Habilidades para Mobile
+function initAboutCarousel() {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (!isMobile) return;
+    
+    const aboutSection = document.querySelector('.about');
+    const skillsGrid = document.querySelector('.skills-grid');
+    const skillCards = document.querySelectorAll('.skill-card');
+    
+    if (!aboutSection || !skillsGrid || skillCards.length === 0) return;
+    
+    // Verificar se já foi inicializado
+    if (skillsGrid.hasAttribute('data-carousel-initialized')) return;
+    skillsGrid.setAttribute('data-carousel-initialized', 'true');
+    
+    // Criar container para indicadores
+    const indicatorsContainer = document.createElement('div');
+    indicatorsContainer.className = 'about-carousel-indicators';
+    
+    // Criar indicadores para cada habilidade
+    skillCards.forEach((card, index) => {
+        const indicator = document.createElement('button');
+        indicator.className = 'about-carousel-indicator';
+        indicator.setAttribute('aria-label', `Ir para habilidade ${index + 1}`);
+        indicator.setAttribute('data-index', index);
+        
+        if (index === 0) {
+            indicator.classList.add('active');
+        }
+        
+        // Adicionar evento de clique para navegar até a habilidade
+        indicator.addEventListener('click', () => {
+            const cardWidth = card.offsetWidth;
+            const cardStyle = window.getComputedStyle(card);
+            const marginRight = parseFloat(cardStyle.marginRight) || 0;
+            const gap = marginRight || 24; // Gap dinâmico ou 1.5rem padrão
+            const scrollPosition = (cardWidth + gap) * index;
+            
+            skillsGrid.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        });
+        
+        indicatorsContainer.appendChild(indicator);
+    });
+    
+    // Adicionar indicadores após o grid de habilidades
+    aboutSection.querySelector('.container').appendChild(indicatorsContainer);
+    
+    // Garantir que inicia no primeiro card ao carregar
+    requestAnimationFrame(() => {
+        skillsGrid.scrollLeft = 0;
+        updateActiveIndicator();
+    });
+    
+    // Atualizar indicador ativo baseado no scroll
+    let scrollTimeout;
+    skillsGrid.addEventListener('scroll', () => {
+        // Debounce para melhor performance
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            updateActiveIndicator();
+        }, 100);
+    });
+    
+    function updateActiveIndicator() {
+        if (!skillCards[0]) return;
+        
+        const scrollLeft = skillsGrid.scrollLeft;
+        const cardWidth = skillCards[0].offsetWidth;
+        const cardStyle = window.getComputedStyle(skillCards[0]);
+        const marginRight = parseFloat(cardStyle.marginRight) || 0;
+        const gap = marginRight || 24;
+        const cardTotalWidth = cardWidth + gap;
+        
+        // Calcular qual card está mais visível com threshold para evitar mudanças prematuras
+        const rawIndex = scrollLeft / cardTotalWidth;
+        const activeIndex = Math.round(rawIndex);
+        const clampedIndex = Math.max(0, Math.min(activeIndex, skillCards.length - 1));
+        
+        // Atualizar classes dos indicadores
+        const indicators = indicatorsContainer.querySelectorAll('.about-carousel-indicator');
+        indicators.forEach((indicator, index) => {
+            if (index === clampedIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+    
+    // Adicionar suporte para gestos de swipe mais suaves
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+    
+    skillsGrid.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        isDragging = true;
+    }, { passive: true });
+    
+    skillsGrid.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        touchEndX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    skillsGrid.addEventListener('touchend', () => {
+        isDragging = false;
+        
+        const swipeThreshold = 50;
+        const swipeDistance = touchStartX - touchEndX;
+        
+        if (Math.abs(swipeDistance) > swipeThreshold && skillCards[0]) {
+            const scrollLeft = skillsGrid.scrollLeft;
+            const cardWidth = skillCards[0].offsetWidth;
+            const cardStyle = window.getComputedStyle(skillCards[0]);
+            const marginRight = parseFloat(cardStyle.marginRight) || 0;
+            const gap = marginRight || 24;
+            const cardTotalWidth = cardWidth + gap;
+            const currentIndex = Math.round(scrollLeft / cardTotalWidth);
+            
+            let newIndex;
+            if (swipeDistance > 0) {
+                // Swipe para a esquerda - próximo
+                newIndex = Math.min(currentIndex + 1, skillCards.length - 1);
+            } else {
+                // Swipe para a direita - anterior
+                newIndex = Math.max(currentIndex - 1, 0);
+            }
+            
+            skillsGrid.scrollTo({
+                left: cardTotalWidth * newIndex,
+                behavior: 'smooth'
+            });
+        }
+    });
+    
+    // Atualizar ao redimensionar a janela
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const isNowMobile = window.innerWidth <= 768;
+            
+            if (isNowMobile !== isMobile) {
+                location.reload(); // Recarregar para aplicar os estilos corretos
+            } else {
+                updateActiveIndicator();
+            }
+        }, 250);
+    });
+    
+    // Inicializar o indicador ativo
+    updateActiveIndicator();
 }
   
   

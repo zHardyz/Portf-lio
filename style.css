@@ -399,6 +399,11 @@ body {
     background: linear-gradient(to top, var(--bg-secondary), transparent);
 }
 
+/* Indicadores do carrossel de habilidades - escondidos por padrão no desktop */
+.about-carousel-indicators {
+    display: none;
+}
+
 .section-title {
     font-size: 2.5rem;
     text-align: center;
@@ -574,6 +579,11 @@ body {
     margin: 0 auto;
 }
 
+/* Indicadores do carrossel - escondidos por padrão no desktop */
+.carousel-indicators {
+    display: none;
+}
+
 .project-card {
     background: var(--card-bg);
     border-radius: 20px;
@@ -720,13 +730,50 @@ body {
 /* Tablets */
 @media (max-width: 768px) {
     .projects {
-        padding: 4rem 1rem;
+        padding: 4rem 0 4rem 0;
+        overflow: hidden;
     }
     
+    .projects .container {
+        padding: 0;
+        position: relative;
+    }
+    
+    .projects .section-title {
+        padding: 0 1rem;
+    }
+    
+    /* Carrossel Horizontal para Mobile */
     .projects-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
         gap: 1.5rem;
-        padding: 1.5rem 0;
+        padding: 1.5rem 1rem;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE e Edge */
+        position: relative;
+    }
+    
+    .projects-grid::-webkit-scrollbar {
+        display: none; /* Chrome, Safari e Opera */
+    }
+    
+    .project-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        max-width: 400px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    
+    /* Efeito suave ao arrastar */
+    .project-card:active {
+        transform: scale(0.98);
+        opacity: 0.9;
     }
     
     .project-image {
@@ -754,17 +801,55 @@ body {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
     }
+    
+    /* Indicadores do Carrossel */
+    .carousel-indicators {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1.5rem 0;
+        margin-top: 1rem;
+    }
+    
+    .carousel-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--border-color);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+    }
+    
+    .carousel-indicator.active {
+        width: 24px;
+        border-radius: 4px;
+        background: var(--accent-primary);
+    }
+    
+    /* Sombras laterais desativadas - conflito com scroll-snap */
+    /* Se necessário, pode ser reativado com ajustes de posicionamento */
 }
 
 /* Smartphones */
 @media (max-width: 480px) {
     .projects {
-        padding: 3rem 0.75rem;
+        padding: 3rem 0 3rem 0;
+    }
+    
+    .projects .section-title {
+        padding: 0 0.75rem;
     }
     
     .projects-grid {
         gap: 1.25rem;
-        padding: 1rem 0;
+        padding: 1rem 0.75rem;
+    }
+    
+    .project-card {
+        flex: 0 0 90%;
     }
     
     .project-image {
@@ -806,6 +891,15 @@ body {
     .project-tags span {
         padding: 0.3rem 0.6rem;
         font-size: 0.75rem;
+    }
+    
+    .carousel-indicator {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .carousel-indicator.active {
+        width: 20px;
     }
 }
 
@@ -1389,10 +1483,82 @@ body {
         gap: 2.5rem;
     }
     
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+    /* Carrossel de Habilidades para Mobile */
+    .about {
+        padding: 5rem 0 5rem 0;
+        overflow: hidden;
     }
+    
+    .about .container {
+        padding: 0;
+        position: relative;
+    }
+    
+    .about .section-title {
+        padding: 0 1.5rem;
+    }
+    
+    .skills-grid {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 1.5rem;
+        padding: 1.5rem 1.5rem;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE e Edge */
+        position: relative;
+    }
+    
+    .skills-grid::-webkit-scrollbar {
+        display: none; /* Chrome, Safari e Opera */
+    }
+    
+    .skill-card {
+        flex: 0 0 80%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        max-width: 300px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    
+    /* Efeito suave ao arrastar */
+    .skill-card:active {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+    
+    /* Indicadores do Carrossel de Habilidades */
+    .about-carousel-indicators {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1.5rem 0;
+        margin-top: 1rem;
+    }
+    
+    .about-carousel-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--border-color);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+    }
+    
+    .about-carousel-indicator.active {
+        width: 24px;
+        border-radius: 4px;
+        background: var(--accent-primary);
+    }
+    
+    /* Sombras laterais desativadas - conflito com scroll-snap */
+    /* Se necessário, pode ser reativado com ajustes de posicionamento */
     
     .projects-grid {
         grid-template-columns: 1fr;
@@ -1435,7 +1601,7 @@ body {
         padding: 5rem 1.5rem 4rem;
     }
     
-    .about, .projects, .services, .contact {
+    .projects, .services, .contact {
         padding: 5rem 1.5rem;
     }
     
@@ -1553,12 +1719,18 @@ body {
         height: 2px;
     }
     
+    /* Ajustes para carrossel de habilidades em smartphones */
+    .about .section-title {
+        padding: 0 1.25rem;
+    }
+    
     .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        gap: 1.25rem;
+        padding: 1rem 1.25rem;
     }
     
     .skill-card {
+        flex: 0 0 85%;
         padding: 1.25rem;
         height: 150px;
     }
@@ -1571,6 +1743,15 @@ body {
     .skill-card span {
         font-size: 0.95rem;
         margin-bottom: 0.8rem;
+    }
+    
+    .about-carousel-indicator {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .about-carousel-indicator.active {
+        width: 20px;
     }
     
     .project-card {
